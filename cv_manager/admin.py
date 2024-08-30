@@ -1,12 +1,10 @@
 from django.contrib import admin
 from .models import *
 
-# Inline classes for each related model
 class ContactInline(admin.TabularInline):
     model = Contact
-    extra = 1  # Number of extra forms to display
+    extra = 1  
     fields = ['contact_type', 'value']
-    # If you want to limit the fields in the inline forms
 
 class SkillInline(admin.TabularInline):
     model = Skill
