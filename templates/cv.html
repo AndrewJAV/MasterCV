@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/8abaea27c7.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
+<style> a:hover {color: {{person.pallete.contrast_color}};} </style>
 <body>
     <div id="main-container">
         <div id="left-container" style="background-color:{{person.pallete.primary_color}}">
@@ -87,7 +88,7 @@
 
                 {% for exp in laboral_exp %}
                     <div class="section-item">
-                        <h4 class="cv-title">{{exp.company}} </h4>
+                        <h4> <a href="{{exp.website}}" target="_blank">{{exp.company}}</a></h4>
                         <p class="item-text education-text">
                             {{exp.position}} ({{exp.start_year}}{% if exp.end_year %}- {{exp.end_year}}{% endif %})
                         </p>
