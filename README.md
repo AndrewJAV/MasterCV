@@ -20,3 +20,4 @@ y personalizar los colores de cada plantilla.
 - Django 5.0.7
 - SQLite
 - HTML/CSS
+- PostgreSQL
