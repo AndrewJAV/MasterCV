@@ -30,7 +30,7 @@
                 {% for contact in contacts %}
                     <div class="grid-container">
                         <i class="{{contact.contact_type}}"></i>
-                        <span>{{contact.value}}</span>
+                        <a type="{{ contact.get_contact_type_display }}" content="{{contact.value}}" class="contact-link" target="_blank">{{contact.value}}</a>
                     </div>
                 {% endfor %}
             </section>
@@ -40,7 +40,7 @@
                 <div class="grid-container">
                     {% for language in languages %}
                         <p class="cv-text">{{language.value}}</p>
-                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{language.proficiency}}%;"></div></div>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{language.proficiency}}%; background-color:{{person.pallete.contrast_color}};"></div></div>
                     {% endfor %}
                 </div>
             </section>
@@ -59,7 +59,7 @@
                 <div class="grid-container">
                     {% for skill in skills %}
                         <p class="cv-text">{{skill.value}}</p>
-                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{skill.proficiency}}%;"></div></div>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{skill.proficiency}}%; background-color:{{person.pallete.contrast_color}};"></div></div>
                     {% endfor %}
                 </div>
             </section>
@@ -68,7 +68,7 @@
                 <h1 class="cv-title">EDUCACIÓN</h1> <hr>
                 {% for education in educations %}
                     <div class="section-item">
-                        <h4>{{education.institution}}</h4>
+                        <h4> <a href="{{education.website}}" target="_blank">{{education.institution}}</a></h4>
                         <p>{{education.description}}</p>
                         <p>
                             {% if education.end_year and education.end_year != education.start_year %}{{education.start_year}} - {{education.end_year}}{% endif %}
@@ -76,7 +76,6 @@
                             {% if not education.end_year %}{{education.start_year}} - Presente{% endif %}
                             | {{education.location}}
                         </p>
-
                     </div>
                 {% endfor %}
             </section>
@@ -97,7 +96,7 @@
             </section>
         </div>
     </div>
-    <div style="width:800px; height:10px; background-color:gray;"></div>
+    <div style="width:800px; height:10px; background-color:gray;" class="footerdiv"></div>
 </body>
 
 <script src="{% static 'js/contact-links.js' %}"> </script>

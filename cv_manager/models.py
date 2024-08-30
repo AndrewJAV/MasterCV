@@ -85,7 +85,7 @@ class Education(models.Model):
     start_year = models.IntegerField()
     end_year = models.IntegerField(null=True, blank=True)
     location = models.CharField(max_length=50)
-
+    website = models.URLField(max_length=250, blank=True, null=True)
     def __str__(self):
         return self.institution
 
@@ -95,10 +95,12 @@ class LaboralExp(models.Model):
     position = models.CharField(max_length=100)
     start_year = models.IntegerField()
     end_year = models.IntegerField(null=True, blank=True)
+    website = models.URLField(max_length=250, blank=True, null=True)
 
     def __str__(self):
         return self.position
-    
+
+
 
 
     

@@ -3,6 +3,7 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     margin:0px;
@@ -169,7 +170,24 @@ i {
     margin-bottom:10%;
 }
 
-@media (max-width:800px) {
+a, a:visited,a:active {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+a:hover {
+    color:cyan;
+}
+
+
+@media (max-width: 800px) and (min-width: 650px) {
+    #main-container {
+        width:100%;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width:650px) {
     #main-container {
         width:100vw;
         margin-top: 0px;
@@ -186,6 +204,4 @@ i {
         justify-content: flex-start;
         margin-bottom:3%;
     }
-
-
 }

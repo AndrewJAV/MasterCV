@@ -21,4 +21,10 @@ def cv_detail(request,slug):
     }
     return render(request,'cv.html',context)
 
+def search(request):
+    query = request.GET.get('q', '')
+    results = Person.objects.filter(name__icontains=query) | Person.objects.filter(last_name__icontains=query)
+    return render(request, 'search_results.html', {'results': results, 'query': query})
+
+
 # Create your views here.

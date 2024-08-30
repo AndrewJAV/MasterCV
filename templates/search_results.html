@@ -1,0 +1,16 @@
+{% extends 'search.html' %}
+
+{% block results %}
+{% if results %}
+{% for person in results %}
+    <div class="result-box">
+
+        <a href="{% url 'cv_view' slug=person.slug %}">{{ person.name }} {{ person.last_name }}</a>
+
+    </div>
+{% endfor %}
+{% else %}
+    <li>No se encontraron resultados para "{{ query }}"</li>
+{% endif %}
+    
+{% endblock %}
