@@ -1,11 +1,30 @@
 from django.db import models
 from django.utils.text import slugify
 
+class ColorPallete(models.Model):
+    pallete_name = models.CharField(max_length=30, null=False)
+    primary_color = models.CharField(max_length=30, null=False)
+    secondary_color = models.CharField(max_length=30, null=False)
+    contrast_color = models.CharField(max_length=30, null=False)
+
+    def __str__(self):
+        return self.pallete_name
+
 class Person(models.Model):
     name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)
+    profile_image = models.ImageField(
+        upload_to='profile_images/',  
+        height_field=None,  
+        width_field=None,  
+        max_length=255,  
+        blank=True, 
+        null=True  
+    )
     about = models.TextField(null=False)
     slug = models.SlugField(null=False)
+    pallete = models.ForeignKey(ColorPallete, related_name='color_pallete', on_delete=models.PROTECT, null=True)
+
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -17,15 +36,15 @@ class Person(models.Model):
 
 class Contact(models.Model):
     Types = [
-        ('email','Email'),
-        ('phone','Phone'),
-        ('adress','Adress'),
-        ('github','Github'),
-        ('linkedin','Linkedin'),
-        ('facebook','Facebook'),
-        ('instagram','Instagram'),
-        ('twitter','Twitter'),
-        ('other','Other'),
+        ('fas fa-envelope','Email'),
+        ('fas fa-phone','Phone'),
+        ('fas fa-map-marker-alt','Adress'),
+        ('fab fa-github','Github'),
+        ('fab fa-linkedin','Linkedin'),
+        ('fab fa-facebook','Facebook'),
+        ('fab fa-instagram','Instagram'),
+        ('fab fa-twitter','Twitter'),
+        ('fas fa-cogs','Other'),
     ]
     
     person = models.ForeignKey(Person, related_name='contacts', on_delete=models.CASCADE)
@@ -33,7 +52,7 @@ class Contact(models.Model):
     contact_type = models.CharField(max_length=30, choices=Types)
 
     def __str__(self):
-        return f"({self.contact_type}) {self.person}"
+        return f"({self.get_contact_type_display()}) {self.value}"
     
 class Language(models.Model):
     person = models.ForeignKey(Person, related_name='languages', on_delete=models.CASCADE)
@@ -79,5 +98,11 @@ class LaboralExp(models.Model):
 
     def __str__(self):
         return self.position
+    
+
+
+    
+
+
 
 # Create your models here.

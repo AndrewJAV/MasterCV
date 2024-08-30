@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/cv2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cv1.css' %}">
     <script src="https://kit.fontawesome.com/8abaea27c7.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
     <div id="main-container">
-        <div id="left-container">
+        <div id="left-container" style="background-color:{{person.pallete.primary_color}}">
             <div id="profile-img-container">
-                <img src="{% static 'images/image.jpg' %}" alt="" id="profile-img">
+                {% if person.profile_image %}
+                    <img src="{{ person.profile_image.url }}" alt="" id="profile-img">
+                {% else %}
+                    <img src="{% static 'images/image.jpg' %}" alt="" id="profile-img">
+                {% endif %}
             </div>
 
             <section class="cv-section" id="about-me">
@@ -25,7 +29,7 @@
 
                 {% for contact in contacts %}
                     <div class="grid-container">
-                        <i class="fas fa-envelope"></i>
+                        <i class="{{contact.contact_type}}"></i>
                         <span>{{contact.value}}</span>
                     </div>
                 {% endfor %}
