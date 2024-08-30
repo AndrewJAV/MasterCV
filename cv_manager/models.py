@@ -101,10 +101,4 @@ class LaboralExp(models.Model):
         return self.position
 
 
-
-
-    
-
-
-
 # Create your models here.
