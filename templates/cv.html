@@ -4,93 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/cv.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cv2.css' %}">
+    <script src="https://kit.fontawesome.com/8abaea27c7.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
-
 <body>
-    <div class="main-container">
-        <div class="left-container">
-            <div class="profile-img-container">
-                <img src="{% static 'images/image.jpg' %}" alt="" class="profile-img">
+    <div id="main-container">
+        <div id="left-container">
+            <div id="profile-img-container">
+                <img src="{% static 'images/image.jpg' %}" alt="" id="profile-img">
             </div>
 
             <section class="cv-section" id="about-me">
-                <h1 class="cv-section-title">SOBRE MÍ</h1> <hr>
-                <p class="cv-section-desc">{{person.about}} </p>
+                <h1 class="cv-title">SOBRE MÍ</h1> <hr>
+                <p class="cv-text">{{person.about}}</p>
             </section>
 
             <section class="cv-section" id="contact-section">
-                <h1 class="cv-section-title">CONTACTO</h1> <hr>
-                {% for contact in contacts %} 
-                    <div class="section-item">
-                        <div class="contact-icon-container">
-                            <img src="{% static 'images/' %}{{contact.contact_type}}.png " alt="" class="contact-icon">
-                        </div>
-                        <a class="contact-link" type="{{contact.contact_type}}" content="{{contact.value}}">{{contact.value}}</a>
+                <h1 class="cv-title">CONTACTO</h1> <hr>
+
+                {% for contact in contacts %}
+                    <div class="grid-container">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{contact.value}}</span>
                     </div>
                 {% endfor %}
             </section>
-            
-            <section  class="cv-section">
-                <h1 class="cv-section-title">IDIOMAS</h1> <hr>
-                <div class="section-grid-container">
-                    {% for language in languages %} 
-                        <p class="cv-section-desc">{{language.value}}</p>
-                        <div class="progress-bar-container"><div class="progress-bar" style="width: {{language.proficiency}}%;"></div></div>
+
+            <section class="cv-section" id="contact-section">
+                <h1 class="cv-title">IDIOMAS</h1> <hr>
+                <div class="grid-container">
+                    {% for language in languages %}
+                        <p class="cv-text">{{language.value}}</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{language.proficiency}}%;"></div></div>
                     {% endfor %}
                 </div>
             </section>
 
             <section class="cv-section" id="aptitude-section">
-                <h1 class="cv-section-title">APTITUDES</h1> <hr>
+                <h1 class="cv-title">APTITUDES</h1> <hr>
                 <ul>
-                   {% for aptitude in aptitudes %} <li>{{aptitude.value}}</li> {%endfor%} 
-                </ul>
+                   {% for aptitude in aptitudes %} <li>{{aptitude.value}}</li> {% endfor %} 
+                </ul>   
             </section>
-
-            
-            
         </div>
-        <div class="right-container">
-            <section class="name-container">
-                <h1>{{person.name}}<br>{{person.last_name}} </h1>
-            </section>
-        
-            <section  class="cv-section">
-                <h1 class="cv-section-title">HABILIDADES</h1> <hr>
-                <div class="section-grid-container">
-                    {% for skill in skills %} 
-                        <p class="cv-section-desc">{{skill.value}}</p>
-                        <div class="progress-bar-container"><div class="progress-bar" style="width: {{skill.proficiency}}%;"></div></div>
+        <div id="right-container">
+
+            <section class="cv-section" id="skill-section">
+                <h1 class="cv-title">HABILIDADES</h1> <hr>
+                <div class="grid-container">
+                    {% for skill in skills %}
+                        <p class="cv-text">{{skill.value}}</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width:{{skill.proficiency}}%;"></div></div>
                     {% endfor %}
                 </div>
             </section>
 
-            <section class="cv-section">
-                <h1 class="cv-section-title">EDUCACIÓN</h1> <hr>
-                {% for education in educations %} 
-                    <div class="education-item">
+            <section class="cv-section" id="education-section">
+                <h1 class="cv-title">EDUCACIÓN</h1> <hr>
+                {% for education in educations %}
+                    <div class="section-item">
                         <h4>{{education.institution}}</h4>
+                        <p>{{education.description}}</p>
+                        <p>
+                            {% if education.end_year and education.end_year != education.start_year %}{{education.start_year}} - {{education.end_year}}{% endif %}
+                            {% if education.end_year and education.end_year == education.start_year %}{{education.start_year}}{% endif %}
+                            {% if not education.end_year %}{{education.start_year}} - Presente{% endif %}
+                            | {{education.location}}
+                        </p>
 
-                        {% if education.description %} <p>{{education.description}}</p> {% endif %}
+                    </div>
+                {% endfor %}
+            </section>
 
-                        {% if education.end_year != education.start_year %} 
-                            {% if education.end_year == None %}
-                                <p class="item">{{education.start_year}} - Presente | {{education.location}}</p>
-                            {% else %}
-                                <p class="item">{{education.start_year}} - {{education.end_year}} | {{education.location}}</p>
-                            {% endif %}
-                        {% else %}
-                            <p class="item">{{education.start_year}} | {{education.location}}</p>
-                        {% endif %}
+            <section class="cv-section" id="education-section">
+                {% if laboral_exp|length > 0%}
+                    <h1 class="cv-section-title">EXPERIENCIA LABORAL</h1><hr>
+                {% endif %}
+
+                {% for exp in laboral_exp %}
+                    <div class="section-item">
+                        <h4 class="cv-title">{{exp.company}} </h4>
+                        <p class="item-text education-text">
+                            {{exp.position}} ({{exp.start_year}} - {{exp.end_year}})
+                        </p>
                     </div>
                 {% endfor %}
             </section>
         </div>
-
-        
     </div>
+    <div style="width:800px; height:10px; background-color:gray;"></div>
 </body>
+
 <script src="{% static 'js/contact-links.js' %}"> </script>
+<script> 
+    var personName = "{{ person.name|escapejs }}";
+    var personLastName = "{{ person.last_name|escapejs }}";
+</script>
+<script src="{% static 'js/name-position.js' %}"></script>
 </html>

@@ -9,7 +9,7 @@ def cv_detail(request,slug):
     skills = Skill.objects.filter(person=person)
     educations = Education.objects.filter(person=person).order_by('-start_year')
     laboral_exp = LaboralExp.objects.filter(person=person)
-
+    
     context = {
         'person':person,
         'contacts':contacts,
