@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'MasterCV.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django-cv",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "django_cv",
         "USER": "postgres",
         "PASSWORD": "2127",
         "HOST": "127.0.0.1",

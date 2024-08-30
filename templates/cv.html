@@ -82,14 +82,14 @@
 
             <section class="cv-section" id="education-section">
                 {% if laboral_exp|length > 0%}
-                    <h1 class="cv-section-title">EXPERIENCIA LABORAL</h1><hr>
+                    <h1 class="cv-title">EXPERIENCIA LABORAL</h1> <hr>
                 {% endif %}
 
                 {% for exp in laboral_exp %}
                     <div class="section-item">
                         <h4 class="cv-title">{{exp.company}} </h4>
                         <p class="item-text education-text">
-                            {{exp.position}} ({{exp.start_year}} - {{exp.end_year}})
+                            {{exp.position}} ({{exp.start_year}}{% if exp.end_year %}- {{exp.end_year}}{% endif %})
                         </p>
                     </div>
                 {% endfor %}
