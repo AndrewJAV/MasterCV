@@ -192,5 +192,11 @@ a:hover {
     margin-bottom: 3%;
   }
 }
+@media (min-width: 651px) {
+  #main-container {
+    margin-top: 1%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+  }
+}
 
 /*# sourceMappingURL=cv1.css.map */

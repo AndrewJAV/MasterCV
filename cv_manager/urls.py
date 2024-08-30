@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('cv/<slug:slug>/', views.cv_detail, name='cv_view'),
-    path('search/', views.search, name='search')
+    path('', views.search, name='search')
 ]

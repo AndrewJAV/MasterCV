@@ -8,9 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const type = link.getAttribute('type');
         const content = link.getAttribute('content');
         let href = '#';
-
-        print(type);
-        print(content);
         switch(type) {
             case 'Email': href=`https://mail.google.com/mail/?view=cm&fs=1&to=${content}`; break;
             case 'Phone': href=`tel:${content}`; break;
